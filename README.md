@@ -2,8 +2,9 @@
 Simple command line number guessing game written in Python.
 
 # Features
+- The program will generate a number between 1 and a randomly determined interval, then will give hints until the number is guessed correctly.
+- When the number is guessed correctly, it will tell you how many guesses it took, and if that was your best try so far.
 - After each game, the program asks if you would like to play again. The program will not stop until you enter 'N' or 'n'.
-- When the number is guesses correctly, it will tell you how many guesses it took, and if that was your best try so far.
 - Calculates and keeps track of a few statistics, such as which game was the user's best attempt and the average number of guesses per game.
 
 # Requirements
