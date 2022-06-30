@@ -1,6 +1,6 @@
-# Name: numberguess.py
+# Name: numguess.py
 #
-# Author: Stephen C Sanders
+# Author: Stephen C Sanders <https://stephensanders.me>
 #
 # Description: Generates a random number between 1 and a randomly determined end interval between 50 and 100, and allows the user to
 # guess the number until they are correct. If the guess is incorrect, the program will give a hint as to whether the guess was too high or low.
