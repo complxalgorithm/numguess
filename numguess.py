@@ -97,9 +97,9 @@ def main():
 
         # Determine if number of guesses was the best
         if num_guesses < best_num_guesses or best_num_guesses == 0:
-            best_num_guesses = num_guesses
-            best_game = times_played   # Updates the game that is user's best
-            num_best_games = 1         # Resets num_best_games to 1
+            best_num_guesses = num_guesses # Updates best number of guesses (lower than previous best)
+            best_game = times_played       # Updates the game that is user's best
+            num_best_games = 1             # Resets number of best games to 1
             print('That\'s your best try so far!')
         elif num_guesses > best_num_guesses:
             print(f'Your best is {best_num_guesses} guesses.')
