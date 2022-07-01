@@ -30,9 +30,10 @@ def main():
     print('Welcome to the Number Guessing Game!')
     print('I will pick a number within a determined interval, and then you will guess until you get it correct.')
     input('Click Enter to continue...')
-
+    
+    # Keep playing until user inputs that they no longer want to play
     while cont_status == 'Y' or cont_status == 'y':
-        # Determine range of possible numbers
+        # Determine end interval for range of possible numbers
         range_limit = get_rand_limit()
         
         # Determine the number to guess
@@ -40,8 +41,9 @@ def main():
 
         print(f'I have chosen a number between 1 and {range_limit}.')
         
+        # Have user keep guessing until they guess the number correctly
         while user_guess != num:
-            # Ask user for guess in int form
+            # Ask user for guess
             user_guess = input('Enter your guess: ')
 
             # Validate that input is a positive number
@@ -57,7 +59,7 @@ def main():
             while user_guess < 1 or user_guess > range_limit:  # Validate that guess is within range
                 print(f'ERROR: Number is not between 1 and {range_limit}. Try again.')
                 user_guess = input('Enter your guess: ')
-
+                
                 while not(user_guess.isdigit()):  # Validate that any new input is a positive number
                     print('ERROR: Input is either a negative number or non-number. Try again.')
                     user_guess = input('Enter your guess: ')
@@ -143,7 +145,7 @@ def get_continue_status():
         return inp
     else:
         print('ERROR: Invalid answer.')
-        return get_continue_status()
+        return get_continue_status()    # Loop back to beginning of function
 
 # Execute the main function
 main()
