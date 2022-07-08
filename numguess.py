@@ -148,4 +148,5 @@ def get_continue_status():
         return get_continue_status()    # Loop back to beginning of function
 
 # Execute the main function
-main()
+if __name__ == '__main__':
+    main()
