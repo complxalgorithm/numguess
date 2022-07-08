@@ -44,30 +44,13 @@ def main():
         # Have user keep guessing until they guess the number correctly
         while user_guess != num:
             # Ask user for guess
-            user_guess = input('Enter your guess: ')
+            user_guess = get_guess(range_limit)
 
-            # Validate that input is a positive number
-            while not(user_guess.isdigit()):
-                # Had to specify "negative number" since this loop interprets negative numbers as non-numbers
-                print('ERROR: Input is either a negative number or a non-number. Try again.')
-                user_guess = input('Enter your guess: ')
+            # Add 1 to number of guesses
+            num_guesses += 1
 
-            # Convert user guess to int
-            user_guess = int(user_guess)
-
-            # Nested validation loop - range and isdigit()
-            while user_guess < 1 or user_guess > range_limit:  # Validate that guess is within range
-                print(f'ERROR: Number is not between 1 and {range_limit}. Try again.')
-                user_guess = input('Enter your guess: ')
-                
-                while not(user_guess.isdigit()):  # Validate that any new input is a positive number
-                    print('ERROR: Input is either a negative number or non-number. Try again.')
-                    user_guess = input('Enter your guess: ')
-                
-                user_guess = int(user_guess)  # Convert valid user guess to int
-            
-            num_guesses += 1 # Add 1 to number of guesses
-            tot_guesses += 1 # Add 1 to number of total guesses
+            # Add 1 to number of total guesses
+            tot_guesses += 1
 
             # Give user a hint if wrong, or congratulate if correct
             if user_guess < num:
@@ -115,7 +98,8 @@ def main():
         # Determine if user wants to play again
         cont_status = get_continue_status()
 
-    avg_guesses = float(tot_guesses / times_played) # Determine average number of guesses per game
+    # Calculate average number of guesses per game
+    avg_guesses = get_average_guesses(tot_guesses, times_played)
     
     print(f'You made a total of {tot_guesses} guesses in your {times_played} games.')
     print(f'You averaged {avg_guesses:.2f} guesses per game played.')
@@ -127,13 +111,37 @@ def main():
 
 # Generates random number range limit between 50 and 100
 def get_rand_limit():
-    rand_lim = random.randint(50, 100)  # Generates random number between 50 and 100
-    return rand_lim
+    return random.randint(50, 100)  # Generates random number between 50 and 100
 
 # Generates random number to guess between 1 and the range limit
 def get_rand_num(limit):
-    rand_int = random.randint(1, limit) # Generates random number between 1 and the number limit
-    return rand_int
+    return random.randint(1, limit) # Generates random number between 1 and the number limit
+
+# Get user's guess
+def get_guess(r_l):
+    guess = input('Enter your guess: ')
+
+    # Validate that input is a positive number
+    while not(guess.isdigit()):
+        # Had to specify "negative number" since this loop interprets negative numbers as non-numbers
+        print('ERROR: Input is either a negative number or a non-number. Try again.')
+        guess = input('Enter your guess: ')
+
+    # Convert user guess to int
+    guess = int(guess)
+
+    # Nested validation loop - range and isdigit()
+    while guess < 1 or guess > r_l:  # Validate that guess is within range
+        print(f'ERROR: Number is not between 1 and {r_l}. Try again.')
+        guess = input('Enter your guess: ')
+                
+        while not(guess.isdigit()):  # Validate that any new input is a positive number
+            print('ERROR: Input is either a negative number or non-number. Try again.')
+            guess = input('Enter your guess: ')
+                
+        guess = int(guess)  # Convert valid user guess to int
+
+    return guess
 
 # User's status on desire to play again
 def get_continue_status():
@@ -146,6 +154,10 @@ def get_continue_status():
     else:
         print('ERROR: Invalid answer.')
         return get_continue_status()    # Loop back to beginning of function
+
+# Calculates average number of guesses per game
+def get_average_guesses(tot, tp):
+    return tot / tp
 
 # Execute the main function
 if __name__ == '__main__':
